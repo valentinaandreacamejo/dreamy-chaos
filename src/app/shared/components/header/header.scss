@@ -158,4 +158,29 @@
   .sound {
     display: none;
   }
+
+  .header {
+    gap: 0.5rem;
+  }
+
+  .actions {
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 0.78rem;
+  }
+
+  .cta {
+    padding-inline: 0.75rem;
+  }
+}
+
+// Tiny phones: the burger must stay reachable; TICKETS is in the menu anyway
+@media (max-width: 359px) {
+  .cta {
+    display: none;
+  }
 }

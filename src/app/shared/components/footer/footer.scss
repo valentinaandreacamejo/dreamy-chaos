@@ -65,3 +65,38 @@
   font-size: var(--fs-xs);
   color: rgba($white, 0.55);
 }
+
+.credit {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba($white, 0.08);
+  font-family: $font-mono;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: rgba($white, 0.4);
+
+  a {
+    color: rgba($white, 0.7);
+    background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+    transition:
+      color 0.25s,
+      background-size 0.35s $ease-out-expo;
+
+    &:hover,
+    &:focus-visible {
+      color: $acid-yellow;
+      background-size: 100% 1px;
+    }
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.25s $ease-bounce;
+  }
+
+  a:hover .arrow,
+  a:focus-visible .arrow {
+    transform: translate(2px, -2px);
+  }
+}

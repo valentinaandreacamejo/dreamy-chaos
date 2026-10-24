@@ -5,6 +5,8 @@
   background:
     radial-gradient(ellipse at 80% 50%, rgba($purple, 0.35), transparent 60%),
     linear-gradient($dark, #15101f 50%, $dark);
+  // The swaying pass + its sticker poke out sideways on narrow screens
+  overflow-x: clip;
 }
 
 .generator {
