@@ -1,0 +1,96 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.contact {
+  position: relative;
+  min-height: 80vh;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 60%, rgba($fuchsia, 0.25), transparent 65%);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 2.5rem;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  line-height: 0.85;
+}
+
+.hl-lime {
+  color: $acid-yellow;
+  @include neon-glow($acid-yellow, 0.4);
+}
+
+.hl-fuchsia {
+  color: $fuchsia;
+  @include neon-glow($fuchsia, 0.6);
+}
+
+.big-cta {
+  display: inline-block;
+  padding: 1.2rem 2.4rem;
+  border-radius: var(--radius-pill);
+  background: $fuchsia;
+  color: $white;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 900;
+  @include sticker-shadow($acid-yellow, 6px);
+  transition: transform 0.3s $ease-bounce;
+
+  &:hover {
+    transform: rotate(-3deg) scale(1.08);
+  }
+}
+
+.newsletter {
+  display: grid;
+  gap: 0.75rem;
+  width: min(100%, 32rem);
+
+  label {
+    font-size: var(--fs-xs);
+    color: rgba($white, 0.7);
+  }
+}
+
+.nl-row {
+  display: flex;
+  border: 2px solid $cyan;
+  border-radius: var(--radius-pill);
+  padding: 0.3rem;
+  @include neon-box($cyan, 0.35);
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 1rem;
+    border: 0;
+    background: transparent;
+    font-family: $font-mono;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-pill);
+    background: $cyan;
+    color: $dark;
+    font-weight: 800;
+  }
+}
+
+.thanks {
+  color: $acid-yellow;
+  font-size: var(--fs-lg);
+}

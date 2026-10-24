@@ -1,0 +1,62 @@
+@use 'variables' as *;
+
+:host {
+  --ticker-bg: #{$acid-yellow};
+  --ticker-fg: #{$purple};
+
+  display: block;
+  overflow: hidden;
+  padding-block: 0.9rem;
+  background: var(--ticker-bg);
+  color: var(--ticker-fg);
+  transform: rotate(var(--ticker-angle, 0deg)) scale(1.05);
+  border-block: 3px solid var(--ticker-fg);
+}
+
+:host(.ticker--fuchsia) {
+  --ticker-bg: #{$fuchsia};
+  --ticker-fg: #{$white};
+}
+
+:host(.ticker--purple) {
+  --ticker-bg: #{$purple};
+  --ticker-fg: #{$acid-yellow};
+}
+
+:host(.ticker--cyan) {
+  --ticker-bg: #{$cyan};
+  --ticker-fg: #{$dark};
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee-left var(--ticker-duration, 30s) linear infinite;
+
+  :host(.ticker--reverse) & {
+    animation-name: marquee-right;
+  }
+
+  :host(:hover) & {
+    animation-play-state: paused;
+  }
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.item {
+  padding-inline: 1.25rem;
+  font-size: clamp(1.25rem, 3.4vw, 2.6rem);
+  white-space: nowrap;
+}
+
+.sep {
+  font-family: $font-mono;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.1em;
+}

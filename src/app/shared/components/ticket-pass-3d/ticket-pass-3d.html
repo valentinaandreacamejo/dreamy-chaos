@@ -1,0 +1,58 @@
+<div class="spinner" #spinner>
+  <button
+    type="button"
+    class="pass"
+    appTilt3d
+    [maxTilt]="16"
+    [flipY]="flipped() ? 180 : 0"
+    [style.--pass-accent]="'var(--color-' + color() + ')'"
+    [attr.aria-label]="'Pass ' + tier() + ' per ' + holder() + ', codice ' + code() + '. Clicca per girarlo.'"
+    (click)="flipped.set(!flipped())"
+  >
+    <span class="face front">
+      <span class="fx" aria-hidden="true"><span class="holo"></span><span class="glare"></span></span>
+
+      <span class="top depth-1">
+        <span class="t-mono">DREAMY CHAOS</span>
+        <span class="t-mono year">2026</span>
+      </span>
+
+      <span class="sticker depth-5"><img [src]="sticker" alt="" width="1280" height="1280" /></span>
+
+      <span class="tier t-display depth-3">
+        @for (word of tierWords(); track $index) {
+          <span>{{ word }}</span>
+        }
+      </span>
+
+      <span class="perk t-mono depth-1">{{ perk() }}</span>
+
+      <span class="holder-block depth-2">
+        <span class="t-mono label">HOLDER</span>
+        <span class="holder t-ui">{{ holder() }}</span>
+      </span>
+
+      <span class="barcode-strip depth-1" aria-hidden="true">
+        <span class="barcode">
+          @for (w of barcode(); track $index) {
+            <i [style.width.px]="w"></i>
+          }
+        </span>
+        <span class="t-mono code">{{ code() }}</span>
+      </span>
+    </span>
+
+    <span class="face back">
+      <span class="fx" aria-hidden="true"><span class="holo"></span><span class="glare"></span></span>
+      <span class="t-mono">ADMIT ONE · 3 DAYS · SUMMER 2026</span>
+      <span class="back-logo t-display">DREAMY<br />CHAOS</span>
+      <span class="barcode barcode--big" aria-hidden="true">
+        @for (w of barcode(); track $index) {
+          <i [style.width.px]="w * 1.5"></i>
+        }
+      </span>
+      <span class="code code--big t-mono">{{ code() }}</span>
+      <span class="t-mono fine">NON TRASFERIBILE · EVENTO DI FANTASIA</span>
+    </span>
+  </button>
+</div>

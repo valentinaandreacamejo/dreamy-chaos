@@ -1,0 +1,10 @@
+<div class="track" role="marquee" [attr.aria-label]="items().join(', ')">
+  @for (copy of [0, 1]; track copy) {
+    <ul class="group" [attr.aria-hidden]="true">
+      @for (item of items(); track $index) {
+        <li class="item t-display">{{ item }}</li>
+        <li class="sep" aria-hidden="true">{{ separator() }}</li>
+      }
+    </ul>
+  }
+</div>

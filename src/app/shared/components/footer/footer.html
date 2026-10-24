@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="container">
+    <div class="top">
+      <p class="countdown t-mono" aria-live="off">
+        <span class="dot" aria-hidden="true"></span>
+        [COUNTDOWN: {{ daysLeft() }} DAYS]
+      </p>
+
+      <nav class="socials" aria-label="Social">
+        @for (s of socials; track s.label) {
+          <a class="neon-badge" [href]="s.href">{{ s.label }}</a>
+        }
+      </nav>
+    </div>
+
+    <p class="wordmark t-mega fx-liquid" aria-hidden="true">DREAMY CHAOS</p>
+
+    <div class="bottom t-mono">
+      <span>© {{ year }} DREAMY CHAOS FESTIVAL · EVENTO DI FANTASIA</span>
+      <span>DESIGN &amp; CODE · ACID Y2K POP ✺ MADE WITH ANGULAR</span>
+    </div>
+  </div>
+</footer>

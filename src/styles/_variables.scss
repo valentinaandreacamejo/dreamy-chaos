@@ -1,0 +1,82 @@
+// ─────────────────────────────────────────────────────────────
+//  DREAMY CHAOS 2026 — Design tokens
+//  SCSS values for compile-time math + CSS custom properties
+//  for runtime theming (JS can read/override them).
+// ─────────────────────────────────────────────────────────────
+
+// Palette
+$acid-yellow: #e8ff00;
+$fuchsia: #ff007a;
+$purple: #7000ff;
+$cyan: #00f0ff;
+$dark: #0e0e12;
+$white: #ffffff;
+
+$palette: (
+  'acid-yellow': $acid-yellow,
+  'fuchsia': $fuchsia,
+  'purple': $purple,
+  'cyan': $cyan,
+  'dark': $dark,
+  'white': $white,
+);
+
+// Font stacks
+$font-display: 'Syne', 'Arial Black', sans-serif;
+$font-glitch: 'Rubik Glitch', 'Syne', sans-serif;
+$font-ui: 'Outfit', system-ui, sans-serif;
+$font-mono: 'Space Mono', ui-monospace, monospace;
+
+// Breakpoints
+$breakpoints: (
+  'sm': 480px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1440px,
+);
+
+// Motion
+$ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+// 3D
+$perspective: 1200px;
+
+// Layering
+$z: (
+  'base': 1,
+  'sticker': 50,
+  'sticker-active': 60,
+  'header': 100,
+  'overlay': 200,
+);
+
+@mixin root-tokens {
+  @each $name, $value in $palette {
+    --color-#{$name}: #{$value};
+  }
+
+  --font-display: #{$font-display};
+  --font-glitch: #{$font-glitch};
+  --font-ui: #{$font-ui};
+  --font-mono: #{$font-mono};
+
+  --ease-bounce: #{$ease-bounce};
+  --ease-out-expo: #{$ease-out-expo};
+
+  --perspective: #{$perspective};
+
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 2rem;
+  --radius-pill: 999px;
+
+  // Updated at runtime by PointerTracker (normalised -1…1)
+  --pointer-x: 0;
+  --pointer-y: 0;
+
+  @each $name, $value in $z {
+    --z-#{$name}: #{$value};
+  }
+}

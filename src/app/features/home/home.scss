@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+// Two crossed tapes
+.tickers {
+  position: relative;
+  display: grid;
+  padding-block: 3rem;
+  overflow: hidden;
+
+  app-ticker {
+    grid-area: 1 / 1;
+  }
+}

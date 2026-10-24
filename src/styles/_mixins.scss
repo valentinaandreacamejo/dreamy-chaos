@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+@mixin bp($size) {
+  @media (min-width: map.get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+@mixin neon-glow($color: $fuchsia, $strength: 1) {
+  text-shadow:
+    0 0 #{4px * $strength} $color,
+    0 0 #{14px * $strength} $color,
+    0 0 #{36px * $strength} rgba($color, 0.6);
+}
+
+@mixin neon-box($color: $cyan, $strength: 1) {
+  box-shadow:
+    0 0 #{6px * $strength} $color,
+    0 0 #{24px * $strength} rgba($color, 0.55),
+    inset 0 0 #{12px * $strength} rgba($color, 0.35);
+}
+
+@mixin acid-gradient($angle: 135deg) {
+  background: linear-gradient($angle, $acid-yellow, $cyan 35%, $purple 65%, $fuchsia);
+}
+
+@mixin acid-text($angle: 90deg) {
+  @include acid-gradient($angle);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+// Hard offset shadow, Y2K sticker style
+@mixin sticker-shadow($color: $dark, $offset: 6px) {
+  box-shadow: $offset $offset 0 $color;
+}
+
+@mixin glass($tint: $white, $alpha: 0.08) {
+  background: rgba($tint, $alpha);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba($white, 0.18);
+}
+
+// Container that hosts 3D children
+@mixin stage-3d($perspective: $perspective) {
+  perspective: $perspective;
+  transform-style: preserve-3d;
+}
+
+@mixin surface-3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

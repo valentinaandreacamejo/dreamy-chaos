@@ -1,0 +1,52 @@
+<section class="hero" id="top">
+  <div class="orb orb--a anim-blob" aria-hidden="true"></div>
+  <div class="orb orb--b anim-blob" aria-hidden="true"></div>
+
+  <div class="layout container">
+    <div class="copy">
+      <p class="t-tag kicker">FESTIVAL · SUMMER 2026</p>
+
+      <h1 class="title" aria-label="Dreamy Chaos 2026">
+        <span class="line line--1 fx-liquid t-stretch" aria-hidden="true">DREAMY</span>
+        <span class="line line--2 fx-liquid t-stretch" aria-hidden="true">CHAOS</span>
+        <span class="line line--3 glitch" data-text="2026" aria-hidden="true">2026</span>
+      </h1>
+
+      <p class="sub t-mono">WHERE DIGITAL REALITY MEETS HIGH-ENERGY MUSIC. SUMMER 2026.</p>
+
+      <div class="ctas">
+        <a class="btn btn--primary t-ui" href="#tickets">CREATE YOUR PASS ↘</a>
+        <a class="btn btn--ghost t-ui" href="#lineup">SEE LINEUP</a>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="frame">
+        <img
+          [src]="crowd"
+          alt="Pubblico Gen Z con occhiali a specchio che balla sotto i laser"
+          width="1536"
+          height="1024"
+          fetchpriority="high"
+        />
+        <span class="frame-tag t-mono" aria-hidden="true">● LIVE · CROWD CAM 01</span>
+      </div>
+
+      @for (s of stickers; track s.src) {
+        <app-draggable-sticker
+          [x]="s.x"
+          [y]="s.y"
+          [size]="s.size"
+          [rotation]="s.rotation"
+          [depth]="s.depth"
+          [floatDelay]="s.delay"
+          bounds="viewport"
+        >
+          <img [src]="s.src" alt="" [width]="s.w" [height]="s.h" />
+        </app-draggable-sticker>
+      }
+
+      <p class="hint t-mono" aria-hidden="true">↖ DRAG THE STICKERS</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,232 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.accent {
+  color: $fuchsia;
+}
+
+.count {
+  font-size: var(--fs-lg);
+  color: $acid-yellow;
+  vertical-align: top;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// Featured stage
+.featured {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(18rem, 42vw, 30rem);
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid $fuchsia;
+  box-shadow: 0 0 60px -10px rgba($fuchsia, 0.6);
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: hue-rotate(var(--stage-hue, 0deg)) saturate(1.2);
+    transition: filter 0.8s $ease-out-expo;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 30%, rgba($dark, 0.9));
+  }
+}
+
+.featured-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.75rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+
+  .t-tag {
+    justify-self: start;
+    color: $acid-yellow;
+  }
+}
+
+.featured-title {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  color: $acid-yellow;
+  @include neon-glow($fuchsia, 0.5);
+}
+
+// Artist grid
+.grid-wrap {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  --card-accent: #{$fuchsia};
+  --card-ink: #{$white};
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 11rem;
+  padding: 1.4rem;
+  border-radius: var(--radius-md);
+  border: 2px solid rgba($white, 0.12);
+  background: rgba($white, 0.03);
+  overflow: hidden;
+  isolation: isolate;
+  animation: card-in 0.5s $ease-bounce backwards;
+  animation-delay: calc(var(--i) * 50ms);
+  transition:
+    transform 0.4s $ease-bounce,
+    border-color 0.2s,
+    color 0.2s;
+
+  &--lime {
+    --card-accent: #{$acid-yellow};
+    --card-ink: #{$dark};
+  }
+
+  // Accent fill that wipes in on hover
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--card-accent);
+    clip-path: circle(0% at 0% 100%);
+    transition: clip-path 0.5s $ease-out-expo;
+  }
+
+  &:hover {
+    color: var(--card-ink);
+    border-color: var(--card-accent);
+    transform: skew(-4deg, 1deg) scale(1.03);
+
+    &::before {
+      clip-path: circle(150% at 0% 100%);
+    }
+
+    .stage {
+      color: inherit;
+    }
+  }
+
+  &--headliner .name::after {
+    content: '★';
+    margin-left: 0.25em;
+    color: var(--card-accent);
+  }
+
+  &--headliner:hover .name::after {
+    color: inherit;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) rotate(-3deg);
+  }
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--fs-xs);
+}
+
+.name {
+  font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+  overflow-wrap: anywhere;
+}
+
+.stage {
+  margin-top: auto;
+  font-size: var(--fs-xs);
+  color: var(--card-accent);
+}
+
+// Cursor-following preview
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.12s linear;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    display: none;
+  }
+}
+
+.preview-card {
+  width: 14rem;
+  margin: 1rem 0 0 1rem;
+  padding: 0.4rem 0.4rem 0.6rem;
+  background: $fuchsia;
+  border-radius: var(--radius-sm);
+  transform: rotate(4deg);
+  @include sticker-shadow($dark, 6px);
+  animation: preview-pop 0.35s $ease-bounce;
+
+  &--lime {
+    background: $acid-yellow;
+    color: $dark;
+    transform: rotate(-4deg);
+  }
+
+  img {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .t-mono {
+    font-size: 0.65rem;
+  }
+}
+
+@keyframes preview-pop {
+  from {
+    transform: scale(0.6) rotate(-10deg);
+    opacity: 0;
+  }
+}

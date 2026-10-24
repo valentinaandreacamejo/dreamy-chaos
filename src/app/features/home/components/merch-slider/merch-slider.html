@@ -1,0 +1,31 @@
+<section class="section container" id="merch">
+  <header class="head">
+    <h2>Merch <span class="drop t-glitch">drop</span></h2>
+    <p class="t-mono note">PICK UP AT THE FESTIVAL · NO SHIPPING</p>
+  </header>
+
+  <ul class="grid">
+    @for (item of items; track item.name; let i = $index) {
+      <li class="product" [style.--accent]="'var(--color-' + item.color + ')'" [style.--i]="i">
+        <div class="visual" appTilt3d [maxTilt]="12">
+          <span class="tag t-mono depth-4">{{ item.tag }}</span>
+          <img
+            class="depth-3"
+            [src]="item.image"
+            [alt]="item.name"
+            [width]="item.imageRatio[0]"
+            [height]="item.imageRatio[1]"
+            loading="lazy"
+          />
+        </div>
+        <div class="info">
+          <div>
+            <h3 class="name">{{ item.name }}</h3>
+            <span class="t-mono kind">{{ item.kind }}</span>
+          </div>
+          <span class="price t-mono">€{{ item.price }}</span>
+        </div>
+      </li>
+    }
+  </ul>
+</section>

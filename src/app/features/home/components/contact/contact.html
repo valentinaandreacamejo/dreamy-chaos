@@ -1,0 +1,32 @@
+<section class="section contact" id="contact">
+  <app-draggable-sticker [x]="8" [y]="52" size="clamp(6rem, 12vw, 10rem)" [rotation]="-14" [depth]="35">
+    <img [src]="smiley" alt="" width="1280" height="1280" loading="lazy" />
+  </app-draggable-sticker>
+  <app-draggable-sticker [x]="82" [y]="58" size="clamp(5rem, 10vw, 8rem)" [rotation]="18" [depth]="-25" [floatDelay]="1.5">
+    <img [src]="starburst" alt="" width="1536" height="1536" loading="lazy" />
+  </app-draggable-sticker>
+
+  <div class="container inner">
+    <h2 class="headline">
+      <span>READY TO</span>
+      <span class="hl-lime fx-liquid">JOIN THE</span>
+      <span class="hl-fuchsia">CHAOS?</span>
+    </h2>
+
+    <div class="cta-row">
+      <a class="big-cta t-ui" href="#tickets">GET PASS 2026 ↗</a>
+    </div>
+
+    @if (!subscribed()) {
+      <form class="newsletter" (submit)="subscribe($event)" novalidate>
+        <label class="t-mono" for="nl-email">GET THE SECRET DROPS FIRST</label>
+        <div class="nl-row">
+          <input id="nl-email" type="email" name="email" required placeholder="you@dream.fm" autocomplete="email" />
+          <button type="submit" class="t-ui">SUBSCRIBE</button>
+        </div>
+      </form>
+    } @else {
+      <p class="thanks t-mono" role="status">✺ YOU'RE IN. SEE YOU IN THE CHAOS ✺</p>
+    }
+  </div>
+</section>

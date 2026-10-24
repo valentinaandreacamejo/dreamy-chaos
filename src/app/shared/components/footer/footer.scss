@@ -1,0 +1,67 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  padding-block: 4rem 2rem;
+  border-top: 2px solid rgba($white, 0.1);
+  overflow: hidden;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border: 2px solid $acid-yellow;
+  border-radius: var(--radius-sm);
+  color: $acid-yellow;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  @include neon-box($acid-yellow, 0.4);
+}
+
+.dot {
+  width: 0.6rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: $fuchsia;
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.wordmark {
+  @include acid-text;
+  margin-block: 3rem 2rem;
+  // 12 glyphs edge to edge inside the container
+  font-size: min(6.3vw, 5.8rem);
+  line-height: 0.8;
+  white-space: nowrap;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: var(--fs-xs);
+  color: rgba($white, 0.55);
+}

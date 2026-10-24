@@ -1,0 +1,13 @@
+<app-hero />
+
+<!-- Crossed bicolor tapes: lime on purple / purple on lime -->
+<div class="tickers">
+  <app-ticker [items]="tickerItems" [angle]="-3" [duration]="16" separator="---" variant="acid-yellow" />
+  <app-ticker [items]="tickerItems" [angle]="3" [duration]="12" separator="---" direction="right" variant="purple" />
+</div>
+
+<app-lineup-interactive />
+<app-experience />
+<app-ticket-generator />
+<app-merch-slider />
+<app-contact />

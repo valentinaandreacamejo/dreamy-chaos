@@ -1,0 +1,51 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.experience {
+  overflow: hidden;
+}
+
+.t-glitch {
+  color: $cyan;
+}
+
+.viewport {
+  display: grid;
+  place-items: center;
+  height: clamp(22rem, 60vw, 36rem);
+}
+
+.scene {
+  @include surface-3d;
+  transition: transform 0.5s ease-out;
+}
+
+.carousel {
+  --size: clamp(9rem, 18vw, 14rem);
+  --radius: calc(var(--size) * 1.2);
+
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  transform-style: preserve-3d;
+  animation: spin-3d 24s linear infinite;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  border: 2px solid $acid-yellow;
+  background: rgba($purple, 0.35);
+  color: $acid-yellow;
+  backface-visibility: visible;
+  transform: rotateY(calc(360deg / var(--n) * var(--i))) translateZ(var(--radius));
+
+  &:nth-child(odd) {
+    border-color: $fuchsia;
+    color: $fuchsia;
+  }
+}

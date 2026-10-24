@@ -1,0 +1,34 @@
+<header class="header" [class.is-open]="menuOpen()">
+  <a class="logo t-display" href="#top" aria-label="Dreamy Chaos — home">DREAMY CHAOS</a>
+
+  <nav id="main-nav" class="nav" aria-label="Principale">
+    @for (link of links; track link.href) {
+      <a class="neon-badge" [href]="link.href" (pointerenter)="audio.blip(660)" (click)="menuOpen.set(false)">
+        {{ link.label }}
+      </a>
+    }
+  </nav>
+
+  <div class="actions">
+    <button
+      class="sound t-mono"
+      type="button"
+      [attr.aria-pressed]="audio.enabled()"
+      [attr.aria-label]="audio.enabled() ? 'Disattiva suoni' : 'Attiva suoni'"
+      (click)="audio.toggle()"
+    >
+      ♫
+    </button>
+    <a class="cta t-ui" href="#tickets" (click)="menuOpen.set(false)">GET PASS<span class="cta-year"> 2026</span></a>
+    <button
+      class="burger"
+      type="button"
+      aria-controls="main-nav"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Menu"
+      (click)="menuOpen.set(!menuOpen())"
+    >
+      <span></span><span></span>
+    </button>
+  </div>
+</header>

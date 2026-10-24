@@ -1,0 +1,56 @@
+<section class="section generator-section" id="tickets">
+  <div class="container generator">
+    <div class="form">
+      <span class="t-tag kicker">PASS GENERATOR · v2026</span>
+      <h2>Your <span class="accent fx-liquid">VIP pass</span> in 3D</h2>
+      <p class="intro t-ui">Scrivi il tuo nome, scegli la vibe e guarda il pass prendere forma in tempo reale.</p>
+
+      <label class="field">
+        <span class="label t-mono">01 · ENTER YOUR NAME</span>
+        <input
+          type="text"
+          maxlength="18"
+          autocomplete="nickname"
+          placeholder="ENTER YOUR NAME"
+          [value]="ticket.holder()"
+          (input)="setName($any($event.target).value)"
+        />
+      </label>
+
+      <label class="field">
+        <span class="label t-mono">02 · CHOOSE YOUR VIBE</span>
+        <span class="select-wrap">
+          <select (change)="setTier($any($event.target).value)">
+            @for (t of tiers; track t.tier) {
+              <option [value]="t.tier" [selected]="t.tier === ticket.tier()">{{ t.tier }}</option>
+            }
+          </select>
+        </span>
+        <span class="perk t-mono">↳ {{ ticket.info().perk }}</span>
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn btn--flip t-ui" (click)="flipped.set(!flipped())">
+          ↻ {{ flipped() ? 'FRONT' : 'FLIP' }}
+        </button>
+        <button type="button" class="btn btn--save t-ui" [disabled]="saving()" (click)="save()">
+          {{ saving() ? 'SAVING…' : '↓ SAVE PNG' }}
+        </button>
+        <button type="button" class="btn btn--ghost t-mono" (click)="ticket.reroll()">NEW CODE</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="halo" [style.--halo]="'var(--color-' + ticket.color() + ')'" aria-hidden="true"></div>
+      <app-ticket-pass
+        [holder]="ticket.displayName()"
+        [tier]="ticket.tier()"
+        [perk]="ticket.info().perk"
+        [code]="ticket.code()"
+        [color]="ticket.color()"
+        [(flipped)]="flipped"
+      />
+      <p class="hint t-mono" aria-hidden="true">HOVER TO TILT · CLICK TO FLIP</p>
+    </div>
+  </div>
+</section>

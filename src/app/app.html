@@ -1,0 +1,26 @@
+<!-- Global SVG filters, referenced from CSS as filter: url(#…) -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Slow liquid wobble for giant display type -->
+    <filter id="acid-liquid" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="7" result="noise">
+        <animate attributeName="baseFrequency" dur="14s" values="0.008 0.02;0.012 0.03;0.008 0.02" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+
+    <!-- Stronger glitchy distortion for hover states -->
+    <filter id="acid-distort" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="turbulence" baseFrequency="0.02 0.18" numOctaves="1" seed="3" result="noise">
+        <animate attributeName="seed" dur="0.6s" values="3;9;14;3" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="B" />
+    </filter>
+  </defs>
+</svg>
+
+<app-header />
+<main>
+  <router-outlet />
+</main>
+<app-footer />

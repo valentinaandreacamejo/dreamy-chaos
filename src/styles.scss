@@ -1,0 +1,99 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+@use 'styles/reset';
+@use 'styles/typography';
+@use 'styles/animations';
+
+:root {
+  @include root-tokens;
+  color-scheme: dark;
+}
+
+body {
+  background: $dark;
+  color: $white;
+}
+
+::selection {
+  background: $acid-yellow;
+  color: $dark;
+}
+
+:focus-visible {
+  outline: 3px solid $acid-yellow;
+  outline-offset: 3px;
+}
+
+// Grain overlay for the acid/Y2K print texture
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+// Liquid/acid type distortion (filters defined in app.html)
+.fx-liquid {
+  filter: url(#acid-liquid);
+}
+
+.fx-distort-hover:hover {
+  filter: url(#acid-distort);
+}
+
+@include reduced-motion {
+  .fx-liquid,
+  .fx-distort-hover:hover {
+    filter: none;
+  }
+}
+
+// Neon "[BADGE]" link
+.neon-badge {
+  font-family: $font-mono;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  padding: 0.35em 0.6em;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-sm);
+  transition:
+    color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+
+  &::before {
+    content: '[';
+  }
+
+  &::after {
+    content: ']';
+  }
+
+  &:hover,
+  &[aria-selected='true'],
+  &[aria-pressed='true'] {
+    color: $acid-yellow;
+    @include neon-box($acid-yellow, 0.5);
+  }
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), 1440px);
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(4rem, 10vw, 9rem);
+}

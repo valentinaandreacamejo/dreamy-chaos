@@ -1,0 +1,67 @@
+<section class="section container" id="lineup">
+  <header class="head">
+    <h2>Line<span class="accent">up</span> <span class="t-mono count">/{{ filtered().length }}</span></h2>
+
+    <div class="filters" role="tablist" aria-label="Filtra per stage">
+      @for (stage of stages; track stage.name) {
+        <button
+          type="button"
+          role="tab"
+          class="neon-badge"
+          [attr.aria-selected]="activeStage() === stage.name"
+          (click)="selectStage(stage.name)"
+        >
+          {{ stage.name }}
+        </button>
+      }
+    </div>
+  </header>
+
+  <!-- Featured stage card -->
+  <article class="featured" [style.--stage-hue]="featured().hue + 'deg'">
+    <img [src]="stageImage" alt="DJ sul palco tra laser fucsia e lime" width="1536" height="1024" loading="lazy" />
+    <div class="featured-copy">
+      <span class="t-tag">NOW SHOWING</span>
+      @let f = featured();
+      <h3 class="featured-title fx-liquid">{{ f.name }}</h3>
+      <p class="t-mono">{{ f.tagline }}</p>
+    </div>
+  </article>
+
+  <div class="grid-wrap" #grid (pointermove)="onGridMove($event, grid)">
+    <ul class="grid" role="tabpanel">
+      @for (artist of filtered(); track artist.name; let i = $index) {
+        <li
+          class="card"
+          [class.card--lime]="artist.accent === 'acid-yellow'"
+          [class.card--headliner]="artist.headliner"
+          [style.--i]="i"
+          (pointerenter)="onCardEnter(artist)"
+          (pointerleave)="hovered.set(null)"
+        >
+          <span class="meta t-mono">
+            <span>{{ artist.day }} · {{ artist.time }}</span>
+            <span>{{ artist.genre }}</span>
+          </span>
+          <h3 class="name fx-distort-hover">{{ artist.name }}</h3>
+          <span class="stage t-mono">↳ {{ artist.stage }}</span>
+        </li>
+      }
+    </ul>
+
+    <!-- Floating preview that follows the cursor (pointer devices only) -->
+    <div
+      class="preview"
+      aria-hidden="true"
+      [class.is-visible]="hovered()"
+      [style.transform]="'translate3d(' + cursor().x + 'px,' + cursor().y + 'px,0)'"
+    >
+      @if (hovered(); as a) {
+        <div class="preview-card" [class.preview-card--lime]="a.accent === 'acid-yellow'">
+          <img [src]="a.headliner ? stageImage : crowdImage" alt="" width="1536" height="1024" />
+          <span class="t-mono">{{ a.name }} · {{ a.day }} {{ a.time }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
