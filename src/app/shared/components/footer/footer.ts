@@ -11,7 +11,6 @@ const DAY = 86_400_000;
 export class Footer {
   private readonly now = signal(Date.now());
 
-  protected readonly year = new Date().getFullYear();
   protected readonly daysLeft = computed(() => Math.max(0, Math.ceil((FESTIVAL_START.getTime() - this.now()) / DAY)));
 
   // TODO: real profile URLs
